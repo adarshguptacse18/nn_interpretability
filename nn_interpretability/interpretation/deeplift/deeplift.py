@@ -254,7 +254,7 @@ class DeepLIFT(DecisionInterpreter):
         self.model.apply(_init_layers)
 
     def _generate_baseline(self, x):
-        self.model(torch.ones(x.shape).to(self.device) * baseLine).to(self.device)
+        self.model(torch.ones(x.shape).to(self.device) * self.baseLine).to(self.device)
 
     def interpret(self, x):
         try:
