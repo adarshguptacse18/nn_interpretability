@@ -38,7 +38,7 @@ class DeepLIFT(DecisionInterpreter):
     https://arxiv.org/pdf/1704.02685.pdf
     Appendix: http://proceedings.mlr.press/v70/shrikumar17a/shrikumar17a-supp.pdf
     """
-    def __init__(self, model: Module, classes: [str], preprocess: transforms.Compose, rule: DeepLIFTRules):
+    def __init__(self, model: Module, classes: [str], preprocess: transforms.Compose, rule: DeepLIFTRules, baseLine: int):
         """
 
         :param model: The model which needs to be interpreted.
@@ -51,7 +51,8 @@ class DeepLIFT(DecisionInterpreter):
 
         self.rule = rule
         self.hooks = []
-
+        self.baseLine = baseLine
+    
     def _setup(self):
         self._prepare_layers()
 
@@ -253,7 +254,7 @@ class DeepLIFT(DecisionInterpreter):
         self.model.apply(_init_layers)
 
     def _generate_baseline(self, x):
-        self.model(torch.zeros(x.shape).to(self.device)).to(self.device)
+        self.model(torch.ones(x.shape).to(self.device) * baseLine).to(self.device)
 
     def interpret(self, x):
         try:
