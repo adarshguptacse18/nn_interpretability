@@ -18,7 +18,7 @@ class Interpreter:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         self.model: Module = model
-        self.model.train()
+        self.model.eval()
         self.model = self.model.to(self.device)
 
         self.classes = classes
