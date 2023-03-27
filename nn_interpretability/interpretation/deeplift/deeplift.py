@@ -38,7 +38,7 @@ class DeepLIFT(DecisionInterpreter):
     https://arxiv.org/pdf/1704.02685.pdf
     Appendix: http://proceedings.mlr.press/v70/shrikumar17a/shrikumar17a-supp.pdf
     """
-    def __init__(self, model: Module, classes: [str], preprocess: transforms.Compose, rule: DeepLIFTRules, baseLine: int):
+    def __init__(self, model: Module, classes: [str], preprocess: transforms.Compose, rule: DeepLIFTRules, baseLine: int, device: 'cpu'):
         """
 
         :param model: The model which needs to be interpreted.
